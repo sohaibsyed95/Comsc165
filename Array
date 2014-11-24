@@ -1,0 +1,135 @@
+// Lab 6, Arrays and Vectors in C++
+// Programmer: Sohaib Syed
+// Editor(s) used: CodeBlocks
+// Compiler(s) used: CodeBlocks
+
+#include <iostream>
+using std::cin;
+using std::cout;
+using std::endl;
+
+#include <cstdlib>
+
+int readArray(int, int[]);
+int stat(int, const int[], int&, int&, int&);
+int histogram(int, const int[], int[]);
+
+int main()
+{
+  //Sohaib Syed, Arrays and Vectors in C++
+  cout << "Lab 6 Arrays and Vectors in C++\n";
+  cout << "Programmer: Sohaib Syed\n";
+  cout << "Editor(s) used: CodeBlocks\n";
+  cout << "Compiler(s) used: CodeBlocks\n";
+  cout << "File: " << __FILE__ << endl;
+  cout << "Compiled: " << __DATE__ << " at " << __TIME__ << endl << endl;
+
+  const int MAX_SCORE = 50;
+  int score[MAX_SCORE];
+  int nscores = readArray(MAX_SCORE, score);
+
+  int minscore, maxscore, avgscore;
+  if (stat(nscores, score, minscore, maxscore, avgscore) == 0)
+  {
+    cout << "Min=" << minscore << endl;
+    cout << "Max=" << maxscore << endl;
+    cout << "Average=" << avgscore << endl;
+    int grade[5] = {};
+    histogram(nscores, score, grade);
+    cout << "A's: " << grade[0] << endl;
+    cout << "B's: " << grade[1] << endl;
+    cout << "C's: " << grade[2] << endl;
+    cout << "D's: " << grade[3] << endl;
+    cout << "F's: " << grade[4] << endl;
+  }
+  else
+  {
+    cout << "no data" << endl;
+  }
+}
+
+int readArray(int MAX_SCORE, int score[])
+{
+  int nscores = 0;
+  char buf[100];
+  cout << "Enter up to 50 scores, separated by spaces\n";
+  cout << "Enter a Q after the last score is entered\n";
+
+  for (int i = 0; i < MAX_SCORE; i++)
+  {
+    cin >> buf;
+    if(buf[0] == 'q' || buf[0] == 'Q')
+    {
+      break;
+    }
+    score[i] = atoi(buf);
+    if (score[i] < 0 || score[i] > 100)
+    {
+      --i;
+      continue;
+    }
+    else
+      nscores++;
+  }
+  return nscores;
+}
+
+
+int stat(int nscores, const int score[], int& minscore, int& maxscore, int& avgscore)
+{
+  minscore = score[0];
+  maxscore = score[0];
+  avgscore = 0;
+  if(nscores != 0)
+  {
+  for (int J = 0; J < nscores; J++)
+    avgscore +=  score[J];
+    avgscore /= nscores;
+    for (int i = 0; i < nscores; i++ )
+    {
+      if (minscore > score[i])
+      {
+      minscore = score[i];
+      }
+      if (maxscore < score[i])
+      {
+      maxscore = score[i];
+      }
+    }
+  return 0;
+  }
+  else return 1;
+}
+
+int histogram(int nscores, const int score[], int grade[])
+{
+  if (nscores != 0)
+  {
+    for (int i = 0; i < nscores; i++)
+    {
+      if (score[i] >= 90)
+      {
+        grade[0] += 1;
+      }
+      if (90 > score[i] && score[i] >= 80)
+      {
+        grade[1] += 1;
+      }
+      if (80 > score[i] && score[i] >= 70)
+      {
+        grade[2] += 1;
+      }
+      if (70 > score[i] && score[i] >= 60)
+      {
+        grade[3] += 1;
+      }
+      if (60 > score[i] && score[i] >= 0)
+      {
+        grade[4] += 1;
+      }
+    }
+    return 0;
+  }
+  else
+    return 1;
+}
