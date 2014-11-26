@@ -9,14 +9,6 @@ int reverseofNum(int);
 
 int main()
 {
-  //Sohaib Syed, Reverse Digits
-  cout << "Lab 5d, Reverse digits \n";
-  cout << "Programmer: Sohaib Syed\n";
-  cout << "Editor(s) used: CodeBlocks\n";
-  cout << "Compiler(s) used: CodeBlocks\n";
-  cout << "File: " << __FILE__ << endl;
-  cout << "Compiled: " << __DATE__ << " at " << __TIME__ << endl << endl;
-
   int number;
   char buf[100];
   while(true)
