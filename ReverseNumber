@@ -1,0 +1,46 @@
+#include <iostream>
+using std::cin;
+using std::cout;
+using std::endl;
+
+#include <cstdlib>
+
+int reverseofNum(int);
+
+int main()
+{
+  //Sohaib Syed, Reverse Digits
+  cout << "Lab 5d, Reverse digits \n";
+  cout << "Programmer: Sohaib Syed\n";
+  cout << "Editor(s) used: CodeBlocks\n";
+  cout << "Compiler(s) used: CodeBlocks\n";
+  cout << "File: " << __FILE__ << endl;
+  cout << "Compiled: " << __DATE__ << " at " << __TIME__ << endl << endl;
+
+  int number;
+  char buf[100];
+  while(true)
+  {
+    cout << endl;
+    cout << "Enter a number to get its reverse\n";
+    cout << "Input Q or q to quit" << endl;
+    cin >> buf;
+    number = atoi(buf);
+    if (buf[0] == 'Q' || buf[0] == 'q')break;
+
+    cout << "Your number reversed is: " << reverseofNum(number);
+  }
+}
+
+int reverseofNum(int number)
+{
+  int change = 0;
+
+  do
+  {
+    change = change * 10 + ( number % 10 );
+    number /= 10;
+  } while(number !=0);
+
+  return change;
+}
