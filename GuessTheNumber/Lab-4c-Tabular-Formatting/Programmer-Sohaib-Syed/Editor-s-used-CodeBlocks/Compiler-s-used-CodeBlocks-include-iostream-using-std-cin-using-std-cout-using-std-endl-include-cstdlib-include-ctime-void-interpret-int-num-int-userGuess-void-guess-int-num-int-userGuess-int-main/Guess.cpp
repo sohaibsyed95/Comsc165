@@ -1,8 +1,3 @@
-// Lab 4c, Tabular Formatting
-// Programmer: Sohaib Syed
-// Editor(s) used: CodeBlocks
-// Compiler(s) used: CodeBlocks
-
 #include <iostream>
 using std::cin;
 using std::cout;
