@@ -1,0 +1,111 @@
+#include <iostream>
+using std::cout;
+using std::endl;
+
+struct tod
+{
+  int hour;
+  int minute;
+  int second;
+  char d[32];
+  tod* next;
+};
+
+void coutTod(const tod*);
+
+int main()
+{
+
+  cout << "------------------------------------" << endl;
+  tod noon = { 12, 0, 0, "Noon" };
+  tod midnight = { 0, 0, 0, "Midnight" };
+  tod lunchtime = { 1, 30, 0, "Lunchtime" };
+  tod suppertime = { 9, 0, 0, "Suppertime" };
+  tod bedtime = { 11, 45, 0, "Bedtime" };
+
+  tod* start = 0;
+  tod* p;
+
+  //creates empty linked list
+  start = &midnight;
+  midnight.next = &noon;
+  noon.next = &lunchtime;
+  lunchtime.next = &suppertime;
+  suppertime.next = &bedtime;
+  //end of list
+  bedtime.next = 0;
+
+  //print the linked list
+  cout << "This is the linked list: " << endl;
+  cout << endl;
+  for (p = start; p; p = p->next)
+    coutTod(p);
+  cout << "------------------------------------" << endl;
+
+  //add breakfast to the linked list and print
+  tod breakfast = { 8, 15, 0, "Breakfast" };
+  breakfast.next = &noon;
+  midnight.next = &breakfast;
+  cout << "Breakfast is added to the linked list:" << endl;
+  cout << endl;
+  for (p = start; p; p = p->next)
+    coutTod(p);
+
+  //add class start time to linked list and print
+  tod classStart = { 9, 30, 0, "Class Starts" };
+  classStart.next = &noon;
+  breakfast.next = &classStart;
+  cout << "------------------------------------" << endl;
+  cout << "Class Starts is added to the linked list:" << endl;
+  cout << endl;
+  for (p = start; p; p = p->next)
+    coutTod(p);
+
+  //add class end time to the linked list and print
+  tod classEnd = { 12, 20, 0, "Class Ends" };
+  classEnd.next = &lunchtime;
+  noon.next = &classEnd;
+  cout << "------------------------------------" << endl;
+  cout << "Class Ends is added to the linked list:" << endl;
+  cout << endl;
+  for (p = start; p; p = p->next)
+    coutTod(p);
+
+  //remove meal times from the linked list
+  midnight.next = &classStart;
+  classEnd.next = &suppertime;
+  classEnd.next = &bedtime;
+  cout << "------------------------------------" << endl;
+  cout << "Meal Times have been removed from the linked list:" << endl;
+  cout << endl;
+  for (p = start; p; p = p->next)
+    coutTod(p);
+
+  //re-insert meal times to the linked list
+  midnight.next = &breakfast;
+  breakfast.next = &classStart;
+
+  classEnd.next = &lunchtime;
+  lunchtime.next = &bedtime;
+
+  lunchtime.next = &suppertime;
+  suppertime.next = &bedtime;
+
+  cout << "------------------------------------" << endl;
+  cout << "Meal Times have been re-added to the linked list:" << endl;
+  cout << endl;
+  for (p = start; p; p = p->next)
+    coutTod(p);
+}
+
+void coutTod(const tod* t)
+{
+  cout << t->d << " is at " << t->hour << ":";
+
+  if (t->minute < 10)
+    cout << '0';
+  cout << t->minute << ':';
+  if (t->second < 10)
+    cout << '0';
+  cout << t->second << endl;
+}
